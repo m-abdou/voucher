@@ -1,4 +1,4 @@
-FROM node:12.16
+FROM node:11.4
 WORKDIR /var/code/
 ADD . /var/code/
 RUN npm install
