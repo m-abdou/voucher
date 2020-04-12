@@ -1,15 +1,15 @@
 version: '3'
 services:
   node:
-    tty: true
+#    tty: true
     stdin_open: true
     container_name: voucher
-    #    env_file:
-    #    - ./.env
     depends_on:
       - mongo
     build:
       context: .
+    ports:
+      - "9090:9090"
     volumes:
       - .:/var/code:rw
     entrypoint: './startup.sh'

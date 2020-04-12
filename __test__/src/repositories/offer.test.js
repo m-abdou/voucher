@@ -1,8 +1,8 @@
 const  offerRepository = require('../../../src/repositories').OfferRepository;
 let offerExample = require("../../resources/examples/offer");
 
-let  {omit}  = require('lodash');
-let  {cloneDeep}  = require('lodash');
+let {omit}  = require('lodash');
+let {cloneDeep}  = require('lodash');
 let offer;
 
 describe('validate on offer repository', () => {

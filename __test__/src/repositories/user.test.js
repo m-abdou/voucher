@@ -1,8 +1,8 @@
 const  userRepository = require('../../../src/repositories').UserRepository;
 let  userExample = require("../../resources/examples/user");
 
-let  {omit}  = require('lodash');
-let  {cloneDeep}  = require('lodash');
+let {omit}  = require('lodash');
+let {cloneDeep}  = require('lodash');
 let user;
 
 describe('validate on user repository', () => {

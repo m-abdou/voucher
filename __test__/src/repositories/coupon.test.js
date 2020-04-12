@@ -1,8 +1,11 @@
+const MongoClient = require("mongodb").MongoClient;
 const CouponRepository = require('../../../src/repositories').CouponRepository;
-let  couponExample = require("../../resources/examples/coupon");
-let  {omit}  = require('lodash');
-let  {cloneDeep}  = require('lodash');
+
+let couponExample = require("../../resources/examples/coupon");
+let {omit}  = require('lodash');
+let {cloneDeep}  = require('lodash');
 let coupon;
+
 
 describe('validate on coupon repository', () => {
     let repository = new CouponRepository();

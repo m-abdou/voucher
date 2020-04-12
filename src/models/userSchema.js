@@ -1,11 +1,11 @@
 let schema = {
-    id: '/coupon',
+    id: '/user',
     type: "object",
     properties: {
         email: { type: "email" },
-        name: { type: "string", minLength: 8 },
+        name: { type: "string", minLength: 3 },
     },
     required: ["name","email"]
 };
 
-export default schema
+module.exports = schema;

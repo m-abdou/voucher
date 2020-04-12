@@ -1,5 +1,5 @@
 FROM node:11.4
 WORKDIR /var/code/
 ADD . /var/code/
-RUN npm install
+EXPOSE 9090
 ENTRYPOINT ./startup.sh

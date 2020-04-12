@@ -1,6 +1,7 @@
 module.exports = {
     coupon: "mmmmmmmm",
-    email: "test@gmail.com",
+    userId: "sasddasdas",
     used: false,
-    offer: "123456",
+    offerId: "123456",
+    usedAt: ""
 };

@@ -2,15 +2,13 @@ let schema = {
     id: '/coupon',
     type: "object",
     properties: {
-        coupon: {
-            type: 'string',
-            minLength: 8,
-        },
-        email: { type: "email" },
+        coupon: { type: 'string', minLength: 8},
+        userId: { type: "object" },
         used: { type: "boolean"},
-        offer: { type: "string"},
+        offerId: { type: "object"},
+        usedAt: { type: "string"},
     },
-    required: ["coupon","email","offer"]
+    required: ["coupon","userId","offerId"]
 };
 
-export default schema
+module.exports = schema;

@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "name": "mohamed",
+      "email": "test@gmail.com"
+    },
+    {
+      "name": "abdou",
+      "email": "test1@gmail.com"
+    }
+  ],
+  "offers": [
+    {
+      "name": "offer1",
+      "discount": 10,
+      "expireDate": "2020/04/15"
+    },
+    {
+      "name": "offer2",
+      "discount": 20,
+      "expireDate": "2020/04/14"
+    },
+    {
+      "name": "offer3",
+      "discount": 30,
+      "expireDate": "2020/04/10"
+    }
+  ]
+
+}

@@ -1,11 +1,12 @@
 let schema = {
-    id: '/coupon',
+    id: '/offer',
     type: "object",
     properties: {
         discount: { type: "number" },
-        name: { type: "string", minLength: 8 },
+        name: { type: "string", minLength: 5 },
+        expireDate: { type: "string"},
     },
     required: ["name","discount"]
 };
 
-export default schema
+module.exports = schema;
