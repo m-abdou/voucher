@@ -16,7 +16,8 @@ we have two phases of installation
 
  - setup environment by using docker
     * run : npm run docker  
- - import data by command
+    
+ - import data by command to generate users offers and vouchers
     * run : npm run voucher generate
 
  now we need start our server  

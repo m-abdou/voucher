@@ -1,8 +1,8 @@
-const SchemaValidator = require("../SchemaValidator");
-const repositories = require("../repositories");
-const offerSchema = require("../models/offerSchema");
-const {map} = require("lodash");
-const {isEmpty} = require("lodash");
+const { map } = require('lodash');
+const { isEmpty } = require('lodash');
+const SchemaValidator = require('../SchemaValidator');
+const repositories = require('../repositories');
+const offerSchema = require('../models/offerSchema');
 
 class Offer {
     constructor() {
@@ -10,23 +10,20 @@ class Offer {
         this.offerRepository = new repositories.OfferRepository();
     }
 
-    async create (data) {
-        let isValid = await this.validator.validate(offerSchema, data);
+    async create(data) {
+        const isValid = await this.validator.validate(offerSchema, data);
 
         if (isEmpty(isValid.errors)) {
-            return await this.offerRepository.create(data);
-        } else {
-            return Error("data not valid")
+            return this.offerRepository.create(data);
         }
+            return Error('data not valid');
+
     }
 
-    async import(offers){
-        return Promise.all(map(offers, async (offer) =>
-            await this.create(offer)
-        ));
+    async import(offers) {
+        return Promise.all(map(offers, async (offer) => this.create(offer)));
     }
 
 }
 
 module.exports = Offer;
-

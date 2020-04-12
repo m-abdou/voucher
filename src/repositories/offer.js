@@ -1,33 +1,33 @@
-const MongoClient = require("../clients/mongoClient");
-let  {pick}  = require('lodash');
+const { pick }  = require('lodash');
+const MongoClient = require('../clients/mongoClient');
 
 class Offer {
     constructor() {
-        this.collection = MongoClient.getCollection("offer");
+        this.collection = MongoClient.getCollection('offer');
     }
 
     create(schema) {
         return this.collection
-            .then(collection => collection.insertOne(schema))
-            .then(result => result.ops[0]);
+            .then((collection) => collection.insertOne(schema))
+            .then((result) => result.ops[0]);
     }
 
-    update (schema){
-        let filter = pick(schema, ["_id"]);
+    update(schema) {
+        const filter = pick(schema, ['_id']);
 
-        let doc = {
-            $set: schema
+        const doc = {
+            $set: schema,
         };
         return this.collection
-            .then(collection => collection.updateOne(filter,doc))
-            .then(result => result.matchedCount);
+            .then((collection) => collection.updateOne(filter, doc))
+            .then((result) => result.matchedCount);
     }
 
     findBy(filter) {
         return this.collection
-            .then(collection => collection.find(filter))
-            .then(cursor => cursor.toArray())
-            .then(result => result);
+            .then((collection) => collection.find(filter))
+            .then((cursor) => cursor.toArray())
+            .then((result) => result);
     }
 }
 

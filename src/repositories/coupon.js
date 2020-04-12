@@ -1,55 +1,54 @@
-const MongoClient = require("../clients/mongoClient");
-let  {pick}  = require('lodash');
-let  {isNil}  = require('lodash');
+const { pick }  = require('lodash');
+const { isNil }  = require('lodash');
+const MongoClient = require('../clients/mongoClient');
 
 
 class Coupon {
     constructor() {
-        this.collection = MongoClient.getCollection("coupon");
+        this.collection = MongoClient.getCollection('coupon');
     }
 
     create(schema) {
         return this.collection
-            .then(collection => collection.insertOne(schema))
-            .then(result => result.ops[0])
-            .catch(error => error);
+            .then((collection) => collection.insertOne(schema))
+            .then((result) => result.ops[0])
+            .catch((error) => error);
     }
 
-    update (schema){
-        let filter = pick(schema, ["_id"]);
-        let doc = {
-            $set: schema
+    update(schema) {
+        const filter = pick(schema, ['_id']);
+        const doc = {
+            $set: schema,
         };
 
         return this.collection
-            .then(collection => collection.updateOne(filter,doc))
-            .then(result => result.matchedCount);
+            .then((collection) => collection.updateOne(filter, doc))
+            .then((result) => result.matchedCount);
     }
 
     findBy(filter) {
         return this.collection
-            .then(collection => collection.find(filter))
-            .then(cursor => cursor.toArray())
-            .then(result => result);
+            .then((collection) => collection.find(filter))
+            .then((cursor) => cursor.toArray())
+            .then((result) => result);
     }
 
     findFull(filter) {
         let matchCoupon = {};
-        if(!isNil(filter.coupon)) {
+        if (!isNil(filter.coupon)) {
             matchCoupon = {
-                "coupon": { "$eq": filter.coupon }
+                coupon: { $eq: filter.coupon },
             };
         }
         let matchEmail = {};
-        if(!isNil(filter.email)) {
+        if (!isNil(filter.email)) {
             matchEmail = {
-                "user.email" : filter.email
-            }
+                'user.email': filter.email,
+            };
         }
 
         return this.collection
-            .then(collection =>
-                collection.aggregate([
+            .then((collection) => collection.aggregate([
                     {
                         $match: matchCoupon,
                     },
@@ -59,10 +58,10 @@ class Coupon {
                             localField: 'offerId',
                             foreignField: '_id',
                             as: 'offer',
-                        }
+                        },
                     },
                     {
-                        $unwind: "$offer"
+                        $unwind: '$offer',
                     },
                     {
                         $lookup: {
@@ -73,16 +72,15 @@ class Coupon {
                         },
                     },
                     {
-                        $unwind: "$user"
+                        $unwind: '$user',
                     },
                     {
-                        $match: matchEmail
-                    }
+                        $match: matchEmail,
+                    },
 
-                ])
-            )
-            .then(cursor => cursor.toArray())
-            .then(result => result);
+                ]))
+            .then((cursor) => cursor.toArray())
+            .then((result) => result);
     }
 }
 

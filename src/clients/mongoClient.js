@@ -1,18 +1,18 @@
 const mongoDB =  require('mongodb');
 
-const config = require("../config");
+const config = require('../config');
 
 const Client = mongoDB.MongoClient;
 
-let options = {
+const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 };
 
 class MongoClient {
     static getCollection(collectionName) {
         return Client.connect(config.mongodb.url, options)
-            .then(client => client.db(config.mongodb.name).collection(collectionName));
+            .then((client) => client.db(config.mongodb.name).collection(collectionName));
     }
 }
 

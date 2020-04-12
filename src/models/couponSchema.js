@@ -1,14 +1,14 @@
-let schema = {
+const schema = {
     id: '/coupon',
-    type: "object",
+    type: 'object',
     properties: {
-        coupon: { type: 'string', minLength: 8},
-        userId: { type: "object" },
-        used: { type: "boolean"},
-        offerId: { type: "object"},
-        usedAt: { type: "string"},
+        coupon: { type: 'string', minLength: 8 },
+        userId: { type: 'object' },
+        used: { type: 'boolean' },
+        offerId: { type: 'object' },
+        usedAt: { type: 'string' },
     },
-    required: ["coupon","userId","offerId"]
+    required: ['coupon', 'userId', 'offerId'],
 };
 
 module.exports = schema;

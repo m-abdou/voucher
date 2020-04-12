@@ -1,18 +1,19 @@
-let express = require("express");
-let router = express.Router();
-let CouponHandler = require("../handlers").Coupon;
+const express = require('express');
+
+const router = express.Router();
+const CouponHandler = require('../handlers').Coupon;
 
 module.exports = function (app) {
-    app.use("/api", router);
-    let couponHandler = new CouponHandler();
-    router.post('/voucher/fetch', async function (req, res, next) {
-        let email = req.body.email;
-        let response = await couponHandler.getCouponsByEmail(email);
+    app.use('/api', router);
+    const couponHandler = new CouponHandler();
+    router.post('/voucher/fetch', async (req, res) => {
+        const email = req.body.email;
+        const response = await couponHandler.getCouponsByEmail(email);
 
-        if(response instanceof Error) {
+        if (response instanceof Error) {
             return res.send({
                 ok: false,
-                status:401,
+                status: 401,
                 error: response.message,
             });
 
@@ -27,15 +28,15 @@ module.exports = function (app) {
     });
 
 
-    router.post('/voucher/redeem', async function (req, res, next) {
-        let email = req.body.email;
-        let voucher = req.body.voucher;
-        let response = await couponHandler.redeem(voucher, email);
+    router.post('/voucher/redeem', async (req, res) => {
+        const email = req.body.email;
+        const voucher = req.body.voucher;
+        const response = await couponHandler.redeem(voucher, email);
 
-        if(response instanceof Error) {
+        if (response instanceof Error) {
             return res.send({
                 ok: false,
-                status:401,
+                status: 401,
                 error: response.message,
             });
 

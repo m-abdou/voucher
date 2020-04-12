@@ -1,8 +1,8 @@
 const program = require('commander');
-const handlers = require("../handlers");
+const { map } = require('lodash');
+const handlers = require('../handlers');
 
-let data = require("../../.data.json");
-const {map} = require("lodash");
+const data = require('../../.data.json');
 
 program
     .version('1.0.0')
@@ -13,18 +13,14 @@ program.command('generate')
     .action(async () => {
         try {
             console.log('Staring');
-            let userHandler = new handlers.User();
-            let users = await userHandler.import(data.users);
-            let offerHandler = new handlers.Offer();
-            let offers = await offerHandler.import(data.offers);
-            let couponHandler = new handlers.Coupon();
+            const userHandler = new handlers.User();
+            const users = await userHandler.import(data.users);
+            const offerHandler = new handlers.Offer();
+            const offers = await offerHandler.import(data.offers);
+            const couponHandler = new handlers.Coupon();
 
             await Promise.all(
-                map(users , async (user) =>
-                    await Promise.all(map(offers, async (offer) =>
-                        await couponHandler.import(user._id, offer._id)
-                    )
-                ))
+                map(users, async (user) => Promise.all(map(offers, async (offer) => couponHandler.import(user._id, offer._id)))),
             );
             console.log('import finished');
             process.exit(0);

@@ -1,10 +1,9 @@
-const {Validator} = require("jsonschema");
+const { Validator } = require('jsonschema');
 
 class SchemaValidator {
-
-    validate(schema, object){
-        let validator = new Validator();
-        return validator.validate(object,schema)
+    validate(schema, object) {
+        const validator = new Validator();
+        return validator.validate(object, schema);
     }
 }
 
