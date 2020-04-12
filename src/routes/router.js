@@ -5,7 +5,7 @@ let CouponHandler = require("../handlers").Coupon;
 module.exports = function (app) {
     app.use("/api", router);
     let couponHandler = new CouponHandler();
-    router.post('/fetch/voucher', async function (req, res, next) {
+    router.post('/voucher/fetch', async function (req, res, next) {
         let email = req.body.email;
         let response = await couponHandler.getCouponsByEmail(email);
 
@@ -27,7 +27,7 @@ module.exports = function (app) {
     });
 
 
-    router.post('/redeem/voucher', async function (req, res, next) {
+    router.post('/voucher/redeem', async function (req, res, next) {
         let email = req.body.email;
         let voucher = req.body.voucher;
         let response = await couponHandler.redeem(voucher, email);
